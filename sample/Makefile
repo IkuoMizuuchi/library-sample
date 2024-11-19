@@ -9,7 +9,7 @@
 # LDFLAGS+=	-L/usr/local/lib -lgreet-static
 LDFLAGS+=	-L/usr/local/lib -lgreet-dynamic
 
-all: main.exe
+all: main.exe main2.exe
 
 %.exe: %.o
 	$(CC) -o $@ $< $(LDFLAGS)

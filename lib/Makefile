@@ -22,10 +22,11 @@ endif
 
 
 # definitions
-LIBRARY_NAME=	greet
-LIBRARY_STATIC=	lib$(LIBRARY_NAME)-static.a
-LIBRARY_DYNAMIC=lib$(LIBRARY_NAME)-dynamic.$(DLLSFX)
-LIBRARY_HEADER=	$(LIBRARY_NAME).h
+LIBRARY_NAME=	greet calc
+LIBRARY_LIB=	$(addprefix lib, $(LIBRARY_NAME))
+LIBRARY_STATIC=	$(addsuffix -static.a, $(LIBRARY_LIB))
+LIBRARY_DYNAMIC=$(addsuffix -dynamic.$(DLLSFX), $(LIBRARY_LIB))
+LIBRARY_HEADER=	$(addsuffix .h, $(LIBRARY_NAME))
 
 #### default target
 all: $(LIBRARY_STATIC) $(LIBRARY_DYNAMIC)
@@ -42,8 +43,11 @@ lib%-dynamic.$(DLLSFX):
 	gcc -shared -o $@ $^
 
 
-lib$(LIBRARY_NAME)-static.a: hello.o goodbye.o
-lib$(LIBRARY_NAME)-dynamic.$(DLLSFX): hello.o goodbye.o
+libgreet-static.a: hello.o goodbye.o
+libgreet-dynamic.$(DLLSFX): hello.o goodbye.o
+
+libcalc-static.a: average.o
+libcalc-dynamic.$(DLLSFX): average.o
 
 clean:
 	rm -f *.o *~ *#*
