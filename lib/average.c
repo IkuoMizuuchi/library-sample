@@ -5,5 +5,7 @@
 
 double average(int a, int b, int c) {
     int sum = a+b+c;
-    return (sum/3.0);
+    double ret = sum/3.0;
+    printf("a=%d, b=%d, c=%d, sum=%d, ret=%f\n", a, b, c, sum, ret);
+    return (ret);
 }
